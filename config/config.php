@@ -1,6 +1,6 @@
 <?php
 
-    define("PATH_ROOT", "C:/wamp/www/pdvApi/");
+    define("PATH_ROOT", "C:/wamp/www/pdv/");
     define("PATH_LOG", PATH_ROOT . "log/");
     define("PATH_DATA", PATH_ROOT . "data/");
     define("PATH_CLASS", PATH_ROOT . "class/");

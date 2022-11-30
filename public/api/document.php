@@ -4,6 +4,11 @@
 
     GLOBAL $get, $post, $login;
 
+    headerResponse((Object)[
+        "code" => 417,
+        "message" => "@@@Testando..."
+    ]);
+
     switch($get->action){
 
         case "cancel":

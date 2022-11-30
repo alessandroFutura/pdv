@@ -8,13 +8,13 @@
         public $client_id;
         public $seller_id;
         public $term_id;
+        public $address_code;
         public $external_type;
-        public $document_code;
+        //public $document_code;
         public $budget_value;
+        public $budget_aliquot_discount;
         public $budget_value_discount;
         public $budget_value_total;
-        public $budget_note;
-        public $budget_note_document;
 
         public function __construct($data)
         {
@@ -23,12 +23,11 @@
             $this->company_id = (int)$data->company_id;
             $this->client_id = $data->client_id;
             $this->seller_id = $data->seller_id;
-            $this->address_code = $data->address_code;
             $this->term_id = @$data->term_id ? $data->term_id : NULL;
-            $this->external_type = $data->external_type ;
-            $this->document_code = @$data->document_code ? $data->document_code : NULL;
-            $this->budget_note = @$data->budget_note ? $data->budget_note : NULL;
-            $this->budget_note_document = @$data->budget_note_document ? $data->budget_note_document : NULL;
+            $this->address_code = $data->address_code;
+            $this->external_type = $data->external_type;
+            //$this->external_type = $data->external_type;
+            //$this->document_code = @$data->document_code ? $data->document_code : NULL;
             $this->budget_value = (float)$data->budget_value;
             $this->budget_aliquot_discount = (float)$data->budget_aliquot_discount;
             $this->budget_value_discount = (float)$data->budget_value_discount;
@@ -62,6 +61,18 @@
                 "external_type" => $data->external_type
             ]);
 
+            if($this->external_type == "D"){
+                $this->external = DAV::get((Object)[
+                    "IdDocumentoAuxVenda" => $data->external_id
+                ]);
+            }
+
+            if($this->external_type == "P"){
+                $this->external = PedidoDeVenda::get((Object)[
+                    "IdPedidoDeVenda" => $data->external_id
+                ]);
+            }
+
             if(@$data->term_id){
                 $this->term = Term::get((Object)[
                     "IdPrazo" => $data->term_id
@@ -84,9 +95,11 @@
                     "address_code",
                     "term_id",
                     "external_type",
-                    "document_code",
+                    //"document_code",
                     "budget_note",
-                    "budget_note_document",
+                    //"truck_size",
+                    //"budget_delivery",
+                    //"budget_note_document",
                     "budget_value=CAST(budget_value AS FLOAT)",
                     "budget_aliquot_discount=CAST(budget_aliquot_discount AS FLOAT)",
                     "budget_value_discount=CAST(budget_value_discount AS FLOAT)",
@@ -116,6 +129,7 @@
                     "INNER JOIN {$conn->dafel->table}.dbo.Pessoa P ON P.IdPessoa = B.client_id",
                     "INNER JOIN {$conn->dafel->table}.dbo.Pessoa P2 ON P2.IdPessoa = B.seller_id",
                     "INNER JOIN {$conn->dafel->table}.dbo.EmpresaERP E(NoLock) ON E.CdEmpresa = B.company_id",
+                    "INNER JOIN {$conn->dafel->table}.dbo.PedidoDeVenda PV ON PV.IdPedidoDeVenda = B.external_id",
                     "LEFT JOIN {$conn->dafel->table}.dbo.Prazo P3 ON P3.IdPrazo = B.term_id",
                     "LEFT JOIN {$conn->commercial->table}.dbo.TerminalDocument TD ON TD.budget_id = B.budget_id",
                     "LEFT JOIN {$conn->commercial->table}.dbo.[User] UC ON UC.user_id = TD.IdUsuarioAutorizacaoCancelamento"
@@ -141,6 +155,7 @@
                     "TD.IdDocumento",
                     "company_cnpj=E.NrCGC",
                     "NmUsuarioCancelamento=UC.user_name",
+                    "PV.DsObservacaoDocumento",
                     "cStat=(CASE WHEN ISNULL(TD.modelo,'XX') = 'OE' THEN 100 ELSE ISNULL(TD.cStat,NULL) END)",
                 ],
                 "filters" => [
