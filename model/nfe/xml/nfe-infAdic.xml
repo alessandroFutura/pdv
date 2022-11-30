@@ -1,0 +1,7 @@
+<infAdic>
+    <infAdFisco></infAdFisco>
+    <infCpl></infCpl>
+    <obsCont xCampo="cargatributaria">
+        <xTexto>sim</xTexto>
+    </obsCont>
+</infAdic>

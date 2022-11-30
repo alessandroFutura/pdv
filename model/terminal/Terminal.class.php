@@ -76,6 +76,70 @@
             return NULL;
         }
 
+        public static function getCurrent()
+        {
+            GLOBAL $post;
+
+            return (Object)[
+                "token" => $post->token,
+                "appVersion" => $post->appVersion,
+                "hostIP" => $post->hostIP,
+                "hostName" => $post->hostName,
+                "platform" => $post->platform,
+                "osType" => $post->osType,
+                "userName" => $post->userName
+            ];
+        }
+
+        public static function editSerie($params)
+        {
+            GLOBAL $commercial, $terminal;
+
+            Model::update($commercial, (Object)[
+                "table" => "TerminalCompany",
+                "fields" => [
+                    ["terminal_company_number", "i", $params->terminal_company_number],
+                    ["terminal_company_changed", "s", date("Y-m-d H:i:s")]
+                ],
+                "filters" => [
+                    ["terminal_id", "i", "=", $terminal->terminal_id],
+                    ["terminal_company_id", "i", "=", $params->terminal_company_id]
+                ]
+            ]);
+        }
+
+        public static function getSerie($params)
+        {
+            GLOBAL $commercial, $terminal;
+
+            $data = Model::get($commercial, (Object)[
+                "join" => 1,
+                "tables" => ["TerminalCompany"],
+                "fields" => [
+                    "terminal_company_id",
+                    "model_id",
+                    "serie_id",
+                    "terminal_company_number",
+                ],
+                "filters" => [
+                    ["terminal_id", "i", "=", $terminal->terminal_id],
+                    ["company_id", "i", "=", $params->company_id],
+                    ["ambient_id", "i", "=", TP_AMBIENT],
+                    ["model_id", "i", "=", $params->model_id],
+                    ["terminal_company_active = 'Y'"]
+                ]
+            ]);
+
+            if(@$data){
+                $data->model_id = (int)$data->model_id;
+                $data->serie_id = (int)$data->serie_id;
+                $data->terminal_company_id = (int)$data->terminal_company_id;
+                $data->terminal_company_number = (int)$data->terminal_company_number;
+            }
+
+            return $data;
+        }
+
         public static function validate($params)
         {
             GLOBAL $commercial, $terminal;
@@ -93,7 +157,7 @@
             if(!@$data){
                 headerResponse((Object)[
                     "code" => 417,
-                    "message" => "Usuário sem empresa vinculada ao terminal."
+                    "message" => "Usuário sem acesso ao terminal."
                 ]);
             }
 

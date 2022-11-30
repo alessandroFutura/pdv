@@ -68,6 +68,14 @@
             return NULL;
         }
 
+        public static function getCurrent()
+        {
+            return (Object)[
+                "user_session_value" => session_id(),
+                "user_session_date" => date("Y-m-d H:i:s")
+            ];
+        }
+
         public static function restore()
         {
             GLOBAL $headers, $commercial;

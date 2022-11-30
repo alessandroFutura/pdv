@@ -3,29 +3,47 @@
     class User
     {
         public $user_id;
+        public $external_id;
         public $person_id;
         public $user_name;
         public $user_active;
+        public $user_current_session;
+        public $terminal;
 
-        public function __construct( $data)
+        public function __construct($data)
         {
             $this->user_id = $data->user_id;
+            $this->external_id = $data->external_id;
             $this->person_id = @$data->person_id ? $data->person_id : NULL;
             $this->user_name = $data->user_name;
             $this->user_active = $data->user_active;
 
-            $this->access = UserAccess::get((Object)[
-                "user_id" => $data->user_id
-            ]);
+            if(@$_POST["get_user_access"]){
+                $this->access = UserAccess::get((Object)[
+                    "user_id" => $data->user_id
+                ]);
+            }
 
-            $this->companies = UserCompany::getList((Object)[
-                "user_id" => $data->user_id
-            ]);
+            if(@$_POST["get_user_companies"]){
+                $this->companies = UserCompany::getList((Object)[
+                    "user_id" => $data->user_id
+                ]);
+            }
 
-            $this->image = getImage((Object)[
-                "image_id" => $data->person_id,
-                "image_dir" => "person"
-            ]);
+            if(@$_POST["get_user_image"]){
+                $this->image = getImage((Object)[
+                    "image_id" => $data->person_id,
+                    "image_dir" => "person"
+                ]);
+            }
+
+            if(@$_POST["get_user_current_session"]){
+                $this->user_current_session = UserSession::getCurrent();
+            }
+
+            if(@$_POST["get_terminal"]){
+                $this->terminal = Terminal::getCurrent();
+            }
         }
 
         public static function get($params)
@@ -36,6 +54,7 @@
                 "tables" => ["[User]"],
                 "fields" => [
                     "user_id",
+                    "external_id",
                     "person_id",
                     "user_name",
                     "user_active"

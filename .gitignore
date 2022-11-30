@@ -1,3 +1,7 @@
-/.idea
-/data/conn.json
+/data
 /log
+/doc
+/.idea
+/public/site
+/class/phpqrcode
+/xml

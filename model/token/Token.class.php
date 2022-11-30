@@ -43,7 +43,7 @@
                     ["token_trash = 'N'"],
                     ["token_active = 'Y'"],
                     ["company_id", "i", "=", $params->company_id],
-                    ["ambient_id", "i", "=", $params->ambient_id]
+                    ["ambient_id", "i", "=", TP_AMBIENT]
                 ]
             ]);
 

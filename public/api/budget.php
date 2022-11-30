@@ -2,26 +2,9 @@
 
     include "../../config/start.php";
 
-    GLOBAL $get, $post;
+    GLOBAL $get, $post, $login;
 
     switch($get->action){
-
-        case "getList":
-
-            if(!@$post->company_id || !@$post->reference || !@$post->states){
-                headerResponse((Object)[
-                    "code" => 417,
-                    "message" => "Parâmetro POST não encontrado"
-                ]);
-            }
-
-            Json::get(Budget::getList((Object)[
-                "company_id" => $post->company_id,
-                "reference" => $post->reference,
-                "states" => $post->states,
-            ]));
-
-        break;
 
         case "get":
 
@@ -47,43 +30,20 @@
 
         break;
 
-        case "submit":
+        case "getList":
 
-            if(
-                !@$post->budget_id ||
-                !@$post->client_id ||
-                !@$post->company_id
-            ){
+            if(!@$post->company_id || !@$post->reference){
                 headerResponse((Object)[
                     "code" => 417,
                     "message" => "Parâmetro POST não encontrado"
                 ]);
             }
 
-            $certificate = Certificate::get((Object)[
-                "company_id" => 1
-            ]);
-
-            if(!@$certificate){
-                headerResponse((Object)[
-                    "code" => 417,
-                    "message" => "Certificado não encontrado"
-                ]);
-            }
-
-            $token = Token::get((Object)[
+            Json::get(Budget::getList((Object)[
                 "company_id" => $post->company_id,
-                "ambient_id" => 2
-            ]);
-
-            if(!@$token){
-                headerResponse((Object)[
-                    "code" => 417,
-                    "message" => "Token não encontrado"
-                ]);
-            }
-
-            var_dump($certificate, $token);
+                "reference" => $post->reference,
+                "state" => @$post->states && sizeof($post->states) == 1 ? $post->states[0] : NULL
+            ]));
 
         break;
     }

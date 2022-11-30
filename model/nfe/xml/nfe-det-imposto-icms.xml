@@ -1,0 +1,32 @@
+<ICMS>
+    <ICMSSN101>
+        <orig></orig>
+        <CSOSN>101</CSOSN>
+        <pCredSN></pCredSN>
+        <vCredICMSSN></vCredICMSSN>
+    </ICMSSN101>
+    <ICMSSN102>
+        <orig></orig>
+        <CSOSN>102</CSOSN>
+    </ICMSSN102>
+    <ICMSSN500>
+        <orig></orig>
+        <CSOSN>500</CSOSN>
+        <vBCSTRet>0.00</vBCSTRet>
+        <pST>0.00</pST>
+        <vICMSSubstituto>0.00</vICMSSubstituto>
+        <vICMSSTRet>0.00</vICMSSTRet>
+    </ICMSSN500>
+    <ICMSSN900>
+        <orig></orig>
+        <CSOSN>900</CSOSN>
+        <modBC>3</modBC>
+        <vBC>0.00</vBC>
+        <pICMS>0.00</pICMS>
+        <vICMS>0.00</vICMS>
+        <modBCST>0</modBCST>
+        <vBCST>0.00</vBCST>
+        <pICMSST>0.00</pICMSST>
+        <vICMSST>0.00</vICMSST>
+    </ICMSSN900>
+</ICMS>

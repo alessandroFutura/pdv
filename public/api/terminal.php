@@ -21,6 +21,8 @@
                 ]);
             }
 
+            $_POST["get_user_access"] = 1;
+
             $login = User::get((Object)[
                 "user_user" => $post->user_user,
                 "user_pass" => md5($post->user_pass)
@@ -51,8 +53,6 @@
 
             postLog((Object)[
                 "user_id" => $login->user_id,
-                "script" => "terminal",
-                "action" => "add",
                 "parent_id" => $terminal_id,
                 "app_version" => $post->appVersion,
                 "host_ip" => $post->hostIP,

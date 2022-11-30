@@ -1,0 +1,25 @@
+<ide>
+    <cUF></cUF>
+    <cNF></cNF>
+    <natOp></natOp>
+    <mod></mod>
+    <serie></serie>
+    <nNF></nNF>
+    <dhEmi></dhEmi>
+    <dhSaiEnt></dhSaiEnt>
+    <tpNF></tpNF>
+    <idDest></idDest>
+    <cMunFG></cMunFG>
+    <tpImp></tpImp>
+    <tpEmis></tpEmis>
+    <cDV></cDV>
+    <tpAmb></tpAmb>
+    <finNFe></finNFe>
+    <indFinal></indFinal>
+    <indPres></indPres>
+    <procEmi></procEmi>
+    <verProc></verProc>
+    <NFref>
+        <refNFe></refNFe>
+    </NFref>
+</ide>

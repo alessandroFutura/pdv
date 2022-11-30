@@ -1,0 +1,20 @@
+<prod>
+    <cProd></cProd>
+    <cEAN></cEAN>
+    <xProd></xProd>
+    <NCM></NCM>
+    <CEST></CEST>
+    <CFOP></CFOP>
+    <uCom></uCom>
+    <qCom></qCom>
+    <vUnCom></vUnCom>
+    <vProd></vProd>
+    <cEANTrib></cEANTrib>
+    <uTrib></uTrib>
+    <qTrib></qTrib>
+    <vUnTrib></vUnTrib>
+    <vFrete></vFrete>
+    <vDesc></vDesc>
+    <vOutro></vOutro>
+    <indTot></indTot>
+</prod>

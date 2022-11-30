@@ -27,9 +27,10 @@
             GLOBAL $conn, $commercial;
 
             $certificate = Model::get($commercial, (Object)[
+                "join" => 1,
                 "tables" => [
-                    "{$conn->commecial->table}.dbo.Certificate C",
-                    "INNER JOIN {$conn->dafel->table}.dbo.EmpresaERP EE ON EE.NrCGC = SUBSTRING(C.certificate_cgc,1,8)"
+                    "{$conn->commercial->table}.dbo.Certificate C",
+                    "INNER JOIN {$conn->dafel->table}.dbo.EmpresaERP EE ON SUBSTRING(REPLACE(EE.NrCGC, '.',''),1,8) = SUBSTRING(C.certificate_cgc,1,8)"
                 ],
                 "fields" => [
                     "C.certificate_id",
@@ -39,7 +40,7 @@
                     "C.certificate_validity",
                     "C.certificate_date"
                 ],
-                "filters" => [["C.certificate_id", "i", "=", $params->certificate_id]]
+                "filters" => [["EE.CdEmpresa", "i", "=", $params->company_id]]
             ]);
 
             if(@$certificate){

@@ -15,6 +15,12 @@
         session_regenerate_id();
     }
 
+    $_POST["get_terminal"] = 1;
+    $_POST["get_user_image"] = 1;
+    $_POST["get_user_access"] = 1;
+    $_POST["get_user_companies"] = 1;
+    $_POST["get_user_current_session"] = 1;
+
     $login = User::get((Object)[
         "user_user" => $post->user_user,
         "user_pass" => md5($post->user_pass)
@@ -38,11 +44,6 @@
         "user_id" => $login->user_id
     ]);
 
-    $login->user_current_session = (Object)[
-        "user_session_value" => session_id(),
-        "user_session_date" => date("Y-m-d H:i:s")
-    ];
-
     User::saveSession((Object)[
         "data" => $login,
         "user_id" => $login->user_id,
@@ -52,10 +53,10 @@
     UserSession::add((Object)[
         "user_id" => $login->user_id,
         "user_session_value" => session_id(),
-        "user_session_app_version" => @$post->AppVersion ? $post->AppVersion : NULL,
-        "user_session_host_ip" => @$post->HostIP ? $post->HostIP : NULL,
-        "user_session_host_name" => @$post->HostName ? $post->HostName : NULL,
-        "user_session_platform" => @$post->Platform ? $post->Platform : NULL
+        "user_session_app_version" => @$post->appVersion ? $post->appVersion : NULL,
+        "user_session_host_ip" => @$post->hostIP ? $post->hostIP : NULL,
+        "user_session_host_name" => @$post->hostName ? $post->hostName : NULL,
+        "user_session_platform" => @$post->platform ? $post->platform : NULL
     ]);
 
     Session::saveSessionUser((Object)[
