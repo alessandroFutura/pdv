@@ -4,11 +4,6 @@
 
     GLOBAL $get, $post, $login;
 
-    headerResponse((Object)[
-        "code" => 417,
-        "message" => "@@@Testando..."
-    ]);
-
     switch($get->action){
 
         case "cancel":
@@ -336,6 +331,7 @@
                 ]);
             }
 
+            $post->change = (Object)$post->change;
             $post->person = (Object)$post->person;
             $post->seller = (Object)$post->seller;
             $post->company = (Object)$post->company;
@@ -480,6 +476,12 @@
                 "cStat" => @$ret->protNFe->cStat ? $ret->protNFe->cStat : $ret->cStat,
                 "xMotivo" => @$ret->protNFe->xMotivo ? $ret->protNFe->xMotivo : $ret->xMotivo,
                 "digVal" => $nfe->digVal,
+                "vFedTrib" => $nfe->total->vFedTrib,
+                "vEstTrib" => $nfe->total->vEstTrib,
+                "vMunTrib" => $nfe->total->vMunTrib,
+                "vlPago" => $post->change->paidValue,
+                "vlTroco" => $post->change->changeValue,
+                "vlCobrado" => $post->change->chargedValue,
                 "CdStatus" => 4
             ]);
 

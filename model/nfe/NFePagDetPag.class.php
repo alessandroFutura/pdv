@@ -33,6 +33,7 @@
             switch($data->external->TpFormaPagamento){
                 case "D": return "01"; break;
                 case "A": return "03"; break;
+                case "C": return "03"; break;
                 default: return NULL; break;
             }
 

@@ -8,12 +8,12 @@
         public function __construct($data)
         {
             $this->detPag = [];
-            $this->vTroco = @$data->budget_value_change ? $data->budget_value_change : 0;
+            $this->vTroco = $data->change->changeValue;
 
             foreach($data->payments as $payment){
                 $detPag = new NFePagDetPag($payment);
                 if($detPag->tPag == "01"){
-                    $detPag->vPag += $this->vTroco;
+                    $detPag->vPag += $data->change->changeValue;
                 }
                 $this->detPag[] = $detPag;
             }

@@ -517,6 +517,14 @@
                     ]);
                 }
             }
+            foreach($this->pag->detPag as $pag){
+               if(!@$pag->tPag){
+                   headerResponse((Object)[
+                       "code" => 417,
+                       "message" => "A forma de pagamento {$pag->xPag} não possui um tipo vinculado."
+                   ]);
+               }
+            }
         }
 
         public function xml()
