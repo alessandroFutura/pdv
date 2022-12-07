@@ -25,6 +25,12 @@
         public $CdStatus;
         public $StCancelado;
         public $terminal_document_date;
+        public $vFedTrib;
+        public $vEstTrib;
+        public $vMunTrib;
+        public $vlPago;
+        public $vlTroco;
+        public $vlCobrado;
 
         public function __construct($data)
         {
@@ -39,7 +45,7 @@
             $this->modelo = $data->modelo;
             $this->idLote = @$data->idLote ? $data->idLote : NULL;
             $this->cNF = @$data->cNF ? $data->cNF : NULL;
-            $this->nNF = $data->nNF;
+            $this->nNF = $this->modelo == "65" ? substr("00000000{$data->nNF}",-9) : $data->nNF;
             $this->chNFe = @$data->chNFe ? $data->chNFe : NULL;
             $this->verAplic = $data->verAplic;
 
@@ -56,11 +62,15 @@
 
             $this->terminal_document_date = $data->terminal_document_date;
 
-            if(@$_GET["get_terminal_budget"]){
-                TerminalDocumentBudge::get((Object)[
-                    "budget_id" => $data->budget_id
-                ]);
-            }
+            $this->vFedTrib = (float)$data->vFedTrib;
+            $this->vEstTrib = (float)$data->vEstTrib;
+            $this->vMunTrib = (float)$data->vMunTrib;
+            $this->vlPago = (float)$data->vlPago;
+            $this->vlTroco = (float)$data->vlTroco;
+            $this->vlCobrado = (float)$data->vlCobrado;
+
+            $date = new DateTime($this->dhRecbto);
+            $this->qrCodePath = "{$date->format("Y/F/d")}/{$this->chNFe}.png";
         }
 
         public static function add($params)
@@ -211,6 +221,12 @@
                     "IdDocumento",
                     "CdStatus",
                     "StCancelado",
+                    "vFedTrib=CAST(vFedTrib AS FLOAT)",
+                    "vEstTrib=CAST(vEstTrib AS FLOAT)",
+                    "vMunTrib=CAST(vMunTrib AS FLOAT)",
+                    "vlPago=CAST(vlPago AS FLOAT)",
+                    "vlTroco=CAST(vlTroco AS FLOAT)",
+                    "vlCobrado=CAST(vlCobrado AS FLOAT)",
                     "terminal_document_date=FORMAT(terminal_document_date, 'yyyy-MM-dd HH:mm:ss')"
                 ],
                 "filters" => [["budget_id", "i", "=", @$params->budget_id ? $params->budget_id : NULL]]

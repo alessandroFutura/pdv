@@ -417,7 +417,7 @@
                 $infNFeSupl->appendChild($urlChave);
 
                 include PATH_CLASS . "phpqrcode/qrlib.php";
-                $path =  PATH_PRODUCTION_FILES . "qrcode/{$params->company_id}/" . date("Y/F/d/");
+                $path =  PATH_PUBLIC . "qrcode/{$params->company_id}/" . date("Y/F/d/");
                 if(!is_dir($path)) mkdir($path, 0755, true);
                 QRCode::png($qrCode,"{$path}{$params->chNFe}.png");
             }

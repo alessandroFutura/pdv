@@ -7,6 +7,7 @@
         public $price_id;
         public $external_id;
         public $budget_item_quantity;
+        public $budget_item_value;
         public $budget_item_value_unitary;
         public $budget_item_aliquot_discount;
         public $budget_item_value_discount;

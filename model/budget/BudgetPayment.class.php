@@ -20,6 +20,7 @@
             $this->budget_payment_value = (float)$data->budget_payment_value;
             $this->budget_payment_installment = (int)$data->budget_payment_installment;
             $this->external = (Object)[
+                "TpCartao" => $data->TpCartao,
                 "DsFormaPagamento" => $data->DsFormaPagamento,
                 "TpFormaPagamento" => $data->TpFormaPagamento,
                 "NrDias" => (int)$data->NrDias >= 0 ? (int)$data->NrDias : 0,
@@ -50,6 +51,7 @@
                 ],
                 "fields" => [
                     "modality_id",
+                    "FP.TpCartao",
                     "NL.IdTipoBaixa",
                     "FPI.AlTACEmpresa",
                     "FPI.AlTACConvenio",

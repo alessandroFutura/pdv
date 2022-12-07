@@ -10,7 +10,6 @@
         public $term_id;
         public $address_code;
         public $external_type;
-        //public $document_code;
         public $budget_value;
         public $budget_aliquot_discount;
         public $budget_value_discount;
@@ -26,8 +25,6 @@
             $this->term_id = @$data->term_id ? $data->term_id : NULL;
             $this->address_code = $data->address_code;
             $this->external_type = $data->external_type;
-            //$this->external_type = $data->external_type;
-            //$this->document_code = @$data->document_code ? $data->document_code : NULL;
             $this->budget_value = (float)$data->budget_value;
             $this->budget_aliquot_discount = (float)$data->budget_aliquot_discount;
             $this->budget_value_discount = (float)$data->budget_value_discount;
@@ -160,10 +157,11 @@
                 ],
                 "filters" => [
                     ["B.budget_trash = 'N'"],
+                    ["B.budget_date >= '2022-12-02'"],
                     ["B.budget_status IN('L','B')"],
                     ["B.company_id", "i", "=", $params->company_id],
-                    ["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],
-                    ["B.budget_date", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
+                    //["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],
+                    //["B.budget_date", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
                 ]
             ]);
 
