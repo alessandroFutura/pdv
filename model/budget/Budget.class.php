@@ -157,11 +157,11 @@
                 ],
                 "filters" => [
                     ["B.budget_trash = 'N'"],
-                    ["B.budget_date >= '2022-12-02'"],
+                    //["B.budget_date >= '2022-12-01'"],
                     ["B.budget_status IN('L','B')"],
                     ["B.company_id", "i", "=", $params->company_id],
-                    //["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],
-                    //["B.budget_date", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
+                    ["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],
+                    ["B.budget_date", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
                 ]
             ]);
 
