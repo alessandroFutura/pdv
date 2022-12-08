@@ -3,12 +3,14 @@
     class Operation
     {
         public $IdOperacao;
+        public $NmOperacao;
         public $StBaixaEstoque;
         public $StAtualizaFinanceiro;
 
         public function __construct($data)
         {
             $this->IdOperacao = $data->IdOperacao;
+            $this->NmOperacao = $data->NmOperacao;
             $this->StBaixaEstoque = $data->StBaixaEstoque;
             $this->StAtualizaFinanceiro = $data->StAtualizaFinanceiro;
 
@@ -46,6 +48,7 @@
                     ],
                     "fields" => [
                         "O.IdOperacao",
+                        "O.NmOperacao",
                         "O.StBaixaEstoque",
                         "O.StAtualizaFinanceiro",
                         "O.IdMensagem1",
