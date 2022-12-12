@@ -12,7 +12,7 @@
 
         public function __construct($data)
         {
-            $this->user_id = $data->user_id;
+            $this->user_id = (int)$data->user_id;
             $this->external_id = $data->external_id;
             $this->person_id = @$data->person_id ? $data->person_id : NULL;
             $this->user_name = $data->user_name;

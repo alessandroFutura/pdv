@@ -70,6 +70,27 @@
 
         break;
 
+        case "operation":
+
+            if(
+                !@$post->terminal_id ||
+                !@$post->terminal_operation_type ||
+                !isset($post->terminal_operation_value)
+            ){
+                headerResponse((Object)[
+                    "code" => 417,
+                    "message" => "Parâmetro POST não encontrado"
+                ]);
+            }
+
+            TerminalOperation::add((Object)[
+                "terminal_id" => $post->terminal_id,
+                "terminal_operation_type" => $post->terminal_operation_type,
+                "terminal_operation_value" => $post->terminal_operation_value
+            ]);
+
+        break;
+
     }
 
 ?>

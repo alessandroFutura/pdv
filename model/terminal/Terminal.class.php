@@ -25,6 +25,10 @@
             $this->terminal_token = $data->terminal_token;
             $this->terminal_nickname = $data->terminal_nickname;
             $this->terminal_date = $data->terminal_date;
+
+            $this->operation = TerminalOperation::get((Object)[
+                "terminal_id" => $data->terminal_id
+            ]);
         }
 
         public static function add($params)

@@ -2,7 +2,7 @@
 
     include "../../config/start.php";
 
-    GLOBAL $login, $get, $post;
+    GLOBAL $login, $get, $post, $terminal;
 
     if(!@$post->data || !@$post->user_name || !@$post->user_pass){
         headerResponse((Object)[
@@ -37,6 +37,23 @@
 
     switch($get->action){
 
+        case "closeTerminalAuthorization":
+
+            if(!@$login->access->closeTerminal || $login->access->closeTerminal == "N"){
+                headerResponse((Object)[
+                    "code" => 417,
+                    "message" => "Usuário não autorizado."
+                ]);
+            }
+
+            postLog((Object)[
+                "parent_id" => $terminal->terminal_id
+            ]);
+
+            Json::get((Object)[]);
+
+        break;
+
         case "documentCancel":
 
             if(
@@ -50,11 +67,13 @@
                 ]);
             }
 
+            $log_id = postLog((Object)[
+                "user_id" => $login->user_id,
+                "parent_id" => $post->data->IdDocumento
+            ]);
+
             Json::get((Object)[
-                "log_id" => postLog((Object)[
-                    "user_id" => $login->user_id,
-                    "parent_id" => $post->data->IdDocumento
-                ])
+                "log_id" => $log_id
             ]);
 
         break;
@@ -73,5 +92,10 @@
         break;
 
     }
+
+    headerResponse((Object)[
+        "code" => 417,
+        "message" => "Ação nao localizada."
+    ]);
 
 ?>

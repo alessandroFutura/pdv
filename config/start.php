@@ -41,7 +41,7 @@
         }
     }
 
-    if(SCRIPT_NAME != "login" && SCRIPT_NAME != "terminal"){
+    if(SCRIPT_NAME != "login"){
         $login = UserSession::restore();
         if(!@$login || $login->user_active == "N"){
             headerResponse((Object)[
