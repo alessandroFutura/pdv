@@ -78,6 +78,30 @@
 
         break;
 
+        case "documentPrint":
+
+            if(
+                ($post->data->modelo == "OE" && (!@$login->access->oe_print || $login->access->oe_print == "N"))
+                ||
+                ($post->data->modelo == "65" && (!@$login->access->nfce_print || $login->access->nfce_print == "N"))
+            ){
+                headerResponse((Object)[
+                    "code" => 417,
+                    "message" => "Usuário não autorizado."
+                ]);
+            }
+
+            $log_id = postLog((Object)[
+                "user_id" => $login->user_id,
+                "parent_id" => $post->data->IdDocumento
+            ]);
+
+            Json::get((Object)[
+                "log_id" => $log_id
+            ]);
+
+        break;
+
         case "openDevTools":
 
             if(!@$login->access->openDevTools || $login->access->openDevTools == "N"){

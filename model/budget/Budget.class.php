@@ -75,6 +75,11 @@
                     "IdPrazo" => $data->term_id
                 ]);
             }
+
+            $this->pages = self::pages((Object)[
+                "items" => $this->items,
+                "payments" => $this->payments
+            ]);
         }
 
         public static function get($params)
@@ -183,6 +188,48 @@
             }
 
             return $budgets;
+        }
+
+        public static function pages($data)
+        {
+            $page = 1;
+            $index = 0;
+            $items = 1;
+            $printedPerPage = 1;
+            $limitFirstPage = 28;
+            $limitOtherPages = 32;
+
+            $payments = sizeof($data->payments) + 6;
+
+            $pages = [(Object)[
+                "items" => []
+            ]];
+
+            foreach($data->items as $item){
+                $item->key = $items;
+                $pages[$index]->items[] = $item;
+                if($printedPerPage % ($page == 1 ? $limitFirstPage : $limitOtherPages) == 0){
+                    $page++;
+                    $index++;
+                    $printedPerPage = 0;
+                    $pages[] = (Object)[
+                        "items" => []
+                    ];
+                }
+                $items++;
+                $printedPerPage++;
+            }
+
+            if(
+                ($page > 1 && $printedPerPage == 0) ||
+                ($printedPerPage + $payments > ($page == 1 ? $limitFirstPage : $limitOtherPages))
+            ){
+                $pages[] = (Object)[
+                    "items" => []
+                ];
+            }
+
+            return $pages;
         }
     }
 

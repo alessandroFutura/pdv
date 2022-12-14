@@ -44,6 +44,7 @@
                 ],
                 "filters" => [
                     ["C.company_active = 'Y'"],
+                    ["ISNULL(C.company_pdv,'N') = 'Y'"],
                     ["UC.user_company_commercial = 'Y'"],
                     ["ISNULL(UC.user_company_pdv, 'N') = 'Y'"],
                     ["UC.user_id", "i", "=", $params->user_id]
