@@ -62,6 +62,10 @@
                 "external_type" => $data->external_type
             ]);
 
+            $this->instance = BudgetInstance::get((Object)[
+                "budget_id" => $data->budget_id
+            ]);
+
             if($this->external_type == "D"){
                 $this->external = DAV::get((Object)[
                     "IdDocumentoAuxVenda" => $data->external_id
@@ -299,7 +303,7 @@
                 "filters" => [
                     ["B.budget_trash = 'N'"],
                     ["B.export_type IN('OE','65')"],
-                    ["B.budget_status IN('L','B')"],
+                    ["B.budget_status IN('L','B','C')"],
                     ["B.company_id", "i", "=", $params->company_id],
                     !@$params->show_others ? ["ISNULL(TD.user_id,{$login->user_id}) = {$login->user_id}"] : NULL,
                     ["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],

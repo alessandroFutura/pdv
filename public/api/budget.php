@@ -26,6 +26,13 @@
                 ]);
             }
 
+            if(!@$budget->instance && !@$budget->document){
+                BudgetInstance::add((Object)[
+                    "budget_id" => $post->budget_id,
+                    "instance_id" => $post->instance_id
+                ]);
+            }
+
             Json::get($budget);
 
         break;
@@ -72,6 +79,19 @@
             postLog((Object)[
                 "parent_id" => $post->budget_id
             ]);
+
+            Json::get([]);
+
+        break;
+
+        case "removeInstance":
+
+            if(@$post->budget_id && @$post->instance_id){
+                BudgetInstance::del((Object)[
+                    "budget_id" => $post->budget_id,
+                    "instance_id" => $post->instance_id
+                ]);
+            }
 
             Json::get([]);
 

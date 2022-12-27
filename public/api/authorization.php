@@ -115,6 +115,19 @@
 
         break;
 
+        case "emptyTerminal":
+
+            if(!@$login->access->emptyTerminal || $login->access->emptyTerminal == "N"){
+                headerResponse((Object)[
+                    "code" => 417,
+                    "message" => "Usuário não autorizado."
+                ]);
+            }
+
+            Json::get([]);
+
+        break;
+
     }
 
     headerResponse((Object)[
