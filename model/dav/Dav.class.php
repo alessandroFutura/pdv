@@ -31,6 +31,20 @@
 
             return NULL;
         }
+
+        public static function edit($params)
+        {
+            GLOBAL $dafel;
+
+            Model::update($dafel, (Object)[
+                "table" => "DocumentoAuxVenda",
+                "fields" => [
+                    ["NrCupomFiscal", "s", @$params->NrCupomFiscal ? $params->NrCupomFiscal : NULL],
+                    ["StDocumentoAuxVenda", "s", $params->StDocumentoAuxVenda]
+                ],
+                "filters" => [["IdDocumentoAuxVenda", "s", "=", $params->IdDocumentoAuxVenda]]
+            ]);
+        }
     }
 
 ?>

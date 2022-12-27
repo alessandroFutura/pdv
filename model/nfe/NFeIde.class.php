@@ -148,35 +148,35 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-ide.xml");
 
-            $xml->getElementsByTagName("cUF")[0]->nodeValue = $this->cUF;
-            $xml->getElementsByTagName("cNF")[0]->nodeValue = $this->cNF;
-            $xml->getElementsByTagName("natOp")[0]->nodeValue = $this->natOp;
-            $xml->getElementsByTagName("mod")[0]->nodeValue = $this->mod;
-            $xml->getElementsByTagName("serie")[0]->nodeValue = $this->serie;
-            $xml->getElementsByTagName("nNF")[0]->nodeValue = $this->nNF;
-            $xml->getElementsByTagName("dhEmi")[0]->nodeValue = $this->dhEmi;
-            $xml->getElementsByTagName("dhSaiEnt")[0]->nodeValue = $this->dhSaiEnt;
-            $xml->getElementsByTagName("tpNF")[0]->nodeValue = $this->tpNF;
-            $xml->getElementsByTagName("idDest")[0]->nodeValue = $this->idDest;
-            $xml->getElementsByTagName("cMunFG")[0]->nodeValue = $this->cMunFG;
-            $xml->getElementsByTagName("tpImp")[0]->nodeValue = $this->tpImp;
-            $xml->getElementsByTagName("tpEmis")[0]->nodeValue = $this->tpEmis;
-            $xml->getElementsByTagName("cDV")[0]->nodeValue = $this->cDV;
-            $xml->getElementsByTagName("tpAmb")[0]->nodeValue = $this->tpAmb;
-            $xml->getElementsByTagName("finNFe")[0]->nodeValue = $this->finNFe;
-            $xml->getElementsByTagName("indFinal")[0]->nodeValue = $this->indFinal;
-            $xml->getElementsByTagName("indPres")[0]->nodeValue = $this->indPres;
-            $xml->getElementsByTagName("procEmi")[0]->nodeValue = $this->procEmi;
-            $xml->getElementsByTagName("verProc")[0]->nodeValue = $this->verProc;
+            $xml->getElementsByTagName("cUF")->item(0)->nodeValue = $this->cUF;
+            $xml->getElementsByTagName("cNF")->item(0)->nodeValue = $this->cNF;
+            $xml->getElementsByTagName("natOp")->item(0)->nodeValue = $this->natOp;
+            $xml->getElementsByTagName("mod")->item(0)->nodeValue = $this->mod;
+            $xml->getElementsByTagName("serie")->item(0)->nodeValue = $this->serie;
+            $xml->getElementsByTagName("nNF")->item(0)->nodeValue = $this->nNF;
+            $xml->getElementsByTagName("dhEmi")->item(0)->nodeValue = $this->dhEmi;
+            $xml->getElementsByTagName("dhSaiEnt")->item(0)->nodeValue = $this->dhSaiEnt;
+            $xml->getElementsByTagName("tpNF")->item(0)->nodeValue = $this->tpNF;
+            $xml->getElementsByTagName("idDest")->item(0)->nodeValue = $this->idDest;
+            $xml->getElementsByTagName("cMunFG")->item(0)->nodeValue = $this->cMunFG;
+            $xml->getElementsByTagName("tpImp")->item(0)->nodeValue = $this->tpImp;
+            $xml->getElementsByTagName("tpEmis")->item(0)->nodeValue = $this->tpEmis;
+            $xml->getElementsByTagName("cDV")->item(0)->nodeValue = $this->cDV;
+            $xml->getElementsByTagName("tpAmb")->item(0)->nodeValue = $this->tpAmb;
+            $xml->getElementsByTagName("finNFe")->item(0)->nodeValue = $this->finNFe;
+            $xml->getElementsByTagName("indFinal")->item(0)->nodeValue = $this->indFinal;
+            $xml->getElementsByTagName("indPres")->item(0)->nodeValue = $this->indPres;
+            $xml->getElementsByTagName("procEmi")->item(0)->nodeValue = $this->procEmi;
+            $xml->getElementsByTagName("verProc")->item(0)->nodeValue = $this->verProc;
 
             if($this->mod == 65){
-                $node = $xml->getElementsByTagName("dhSaiEnt")[0];
+                $node = $xml->getElementsByTagName("dhSaiEnt")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
-            $node = $xml->getElementsByTagName("NFref")[0];
+            $node = $xml->getElementsByTagName("NFref")->item(0);
             if($this->finNFe == 4 && @$this->refNFe){
-                $node->getElementsByTagName("refNFe")[0]->nodeValue = $this->refNFe;
+                $node->getElementsByTagName("refNFe")->item(0)->nodeValue = $this->refNFe;
             } else {
                 $node->parentNode->removeChild($node);
             }

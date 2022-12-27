@@ -2,7 +2,7 @@
 
     include "../../config/start.php";
 
-    GLOBAL $terminal, $login, $headers, $get;
+    GLOBAL $config, $terminal, $login, $headers, $get;
 
     switch($get->action){
 
@@ -10,6 +10,7 @@
 
             Json::get((Object)[
                 "login" => $login,
+                "config" => $config,
                 "terminal" => $terminal
             ]);
 

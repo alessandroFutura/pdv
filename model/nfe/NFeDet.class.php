@@ -21,16 +21,16 @@
             $xml = new DOMDocument();
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-det.xml");
-            $xml->getElementsByTagName("det")[0]->setAttribute("nItem", $this->nItem);
+            $xml->getElementsByTagName("det")->item(0)->setAttribute("nItem", $this->nItem);
 
             $prod = $this->prod->xml();
-            $xml->getElementsByTagName("det")[0]->appendChild(
-                $xml->importNode($prod->getElementsByTagName("prod")[0],TRUE)
+            $xml->getElementsByTagName("det")->item(0)->appendChild(
+                $xml->importNode($prod->getElementsByTagName("prod")->item(0),TRUE)
             );
 
             $imposto = $this->imposto->xml();
-            $xml->getElementsByTagName("det")[0]->appendChild(
-                $xml->importNode($imposto->getElementsByTagName("imposto")[0],TRUE)
+            $xml->getElementsByTagName("det")->item(0)->appendChild(
+                $xml->importNode($imposto->getElementsByTagName("imposto")->item(0),TRUE)
             );
 
             return $xml;

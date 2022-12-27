@@ -251,14 +251,14 @@
             $xml = new DOMDocument();
             $xml->load("{$params->path}retorno/{$date}/{$params->file}");
 
-            $retEvento  = $xml->getElementsByTagName("retEvento")[0];
+            $retEvento  = $xml->getElementsByTagName("retEvento")->item(0);
 
             return (Object)[
-                "xMotivo" => str_replace("Rejeicao: ", "", $xml->getElementsByTagName("xMotivo")[0]->nodeValue),
-                "cStat" => $xml->getElementsByTagName("cStat")[0]->nodeValue,
+                "xMotivo" => str_replace("Rejeicao: ", "", $xml->getElementsByTagName("xMotivo")->item(0)->nodeValue),
+                "cStat" => $xml->getElementsByTagName("cStat")->item(0)->nodeValue,
                 "retEvento" => (Object)[
-                    "xMotivo" => @$retEvento ? str_replace("Rejeicao: ", "", $retEvento->getElementsByTagName("xMotivo")[0]->nodeValue) : NULL,
-                    "cStat" => @$retEvento ? $retEvento->getElementsByTagName("cStat")[0]->nodeValue : NULL,
+                    "xMotivo" => @$retEvento ? str_replace("Rejeicao: ", "", $retEvento->getElementsByTagName("xMotivo")->item(0)->nodeValue) : NULL,
+                    "cStat" => @$retEvento ? $retEvento->getElementsByTagName("cStat")->item(0)->nodeValue : NULL,
                 ]
             ];
         }
@@ -287,7 +287,7 @@
             $xml = new DOMDocument();
             $xml->load("{$params->path}retorno/{$date}/{$params->chNFe}-{$params->type}-ret.xml");
 
-            $protNFeNode = $xml->getElementsByTagName("protNFe")[0];
+            $protNFeNode = $xml->getElementsByTagName("protNFe")->item(0);
             $protNFe = (Object)[
                 "tpAmb" => NULL,
                 "verAplic" => NULL,
@@ -300,14 +300,14 @@
             ];
 
             if(@$protNFeNode){
-                $tpAmbNode = $protNFeNode->getElementsByTagName("tpAmb")[0];
-                $verAplicNode = $protNFeNode->getElementsByTagName("verAplic")[0];
-                $chNFeNode = $protNFeNode->getElementsByTagName("chNFe")[0];
-                $dhRecbtoNode = $protNFeNode->getElementsByTagName("dhRecbto")[0];
-                $nProtNode = $protNFeNode->getElementsByTagName("nProt")[0];
-                $digValNode = $protNFeNode->getElementsByTagName("digVal")[0];
-                $cStatNode = $protNFeNode->getElementsByTagName("cStat")[0];
-                $xMotivoNode = $protNFeNode->getElementsByTagName("xMotivo")[0];
+                $tpAmbNode = $protNFeNode->getElementsByTagName("tpAmb")->item(0);
+                $verAplicNode = $protNFeNode->getElementsByTagName("verAplic")->item(0);
+                $chNFeNode = $protNFeNode->getElementsByTagName("chNFe")->item(0);
+                $dhRecbtoNode = $protNFeNode->getElementsByTagName("dhRecbto")->item(0);
+                $nProtNode = $protNFeNode->getElementsByTagName("nProt")->item(0);
+                $digValNode = $protNFeNode->getElementsByTagName("digVal")->item(0);
+                $cStatNode = $protNFeNode->getElementsByTagName("cStat")->item(0);
+                $xMotivoNode = $protNFeNode->getElementsByTagName("xMotivo")->item(0);
                 $protNFe = (Object)[
                     "tpAmb" => @$tpAmbNode ? $tpAmbNode->nodeValue : NULL,
                     "verAplic" => @$verAplicNode ? $verAplicNode->nodeValue : NULL,
@@ -328,23 +328,23 @@
                     $sign->preserveWhiteSpace = FALSE;
                     $sign->load("{$params->path}assinadas/{$date}/{$params->chNFe}-{$params->type}-sign.xml");
 
-                    $SignatureNode = $sign->getElementsByTagName("Signature")[0];
+                    $SignatureNode = $sign->getElementsByTagName("Signature")->item(0);
                     $SignatureNode->parentNode->removeChild($SignatureNode);
 
-                    $ret->getElementsByTagName("nfeProc")[0]->appendChild(
-                        $ret->importNode($sign->getElementsByTagName("NFe")[0],TRUE)
+                    $ret->getElementsByTagName("nfeProc")->item(0)->appendChild(
+                        $ret->importNode($sign->getElementsByTagName("NFe")->item(0),TRUE)
                     );
 
-                    $ret->getElementsByTagName("NFe")[0]->appendChild(
+                    $ret->getElementsByTagName("NFe")->item(0)->appendChild(
                         $ret->importNode($SignatureNode,TRUE)
                     );
 
-                    $ret->getElementsByTagName("nfeProc")[0]->appendChild(
+                    $ret->getElementsByTagName("nfeProc")->item(0)->appendChild(
                         $ret->importNode($protNFeNode,TRUE)
                     );
 
-                    $ret->getElementsByTagName("NFe")[0]->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
-                    $ret->getElementsByTagName("protNFe")[0]->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
+                    $ret->getElementsByTagName("NFe")->item(0)->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
+                    $ret->getElementsByTagName("protNFe")->item(0)->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
 
                     $path = "{$params->path}/autorizadas/{$date}/";
                     if( !is_dir($path) ) mkdir($path, 0755, true);
@@ -354,11 +354,11 @@
             }
 
             return (Object)[
-                "tpAmb" => $xml->getElementsByTagName("tpAmb")[0]->nodeValue,
-                "verAplic" => $xml->getElementsByTagName("verAplic")[0]->nodeValue,
-                "cStat" => $xml->getElementsByTagName("cStat")[0]->nodeValue,
-                "xMotivo" => $xml->getElementsByTagName("xMotivo")[0]->nodeValue,
-                "dhRecbto" => $xml->getElementsByTagName("dhRecbto")[0]->nodeValue,
+                "tpAmb" => $xml->getElementsByTagName("tpAmb")->item(0)->nodeValue,
+                "verAplic" => $xml->getElementsByTagName("verAplic")->item(0)->nodeValue,
+                "cStat" => $xml->getElementsByTagName("cStat")->item(0)->nodeValue,
+                "xMotivo" => $xml->getElementsByTagName("xMotivo")->item(0)->nodeValue,
+                "dhRecbto" => $xml->getElementsByTagName("dhRecbto")->item(0)->nodeValue,
                 "protNFe" => $protNFe
             ];
         }
@@ -390,7 +390,7 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load("{$params->path}backup/{$date}/{$params->file}");
 
-            $node = $xml->getElementsByTagName($params->node)[0];
+            $node = $xml->getElementsByTagName($params->node)->item(0);
             $dados = $node->C14N(true, false, null, null);
 
             $DigestValue = NULL;
@@ -408,7 +408,7 @@
                     "token_code" => $params->token_code,
                     "token_value" => $params->token_value
                 ]);
-                $NFeNode = $xml->getElementsByTagName("NFe")[0];
+                $NFeNode = $xml->getElementsByTagName("NFe")->item(0);
                 $infNFeSupl = $xml->createElement("infNFeSupl");
                 $NFeNode->appendChild($infNFeSupl);
                 $nodeqr = $infNFeSupl->appendChild($xml->createElement("qrCode"));
@@ -426,11 +426,11 @@
             $signature->preserveWhiteSpace = FALSE;
             $signature->load(PATH_MODEL . "nfe/xml/nfe-signature.xml");
 
-            $signature->getElementsByTagName("Reference")[0]->setAttribute("URI", $params->URI);
-            $signature->getElementsByTagName("DigestValue")[0]->nodeValue = $DigestValue;
+            $signature->getElementsByTagName("Reference")->item(0)->setAttribute("URI", $params->URI);
+            $signature->getElementsByTagName("DigestValue")->item(0)->nodeValue = $DigestValue;
 
             $dataSignature = '';
-            $signedInfoNode = $signature->getElementsByTagName("SignedInfo")[0];
+            $signedInfoNode = $signature->getElementsByTagName("SignedInfo")->item(0);
 
             $cnSignedInfoNode = $signedInfoNode->C14N(true, false, null, null);
             if(!openssl_sign($cnSignedInfoNode, $dataSignature, $objSSLPriKey)){
@@ -438,7 +438,7 @@
             }
 
             $SignatureValue = base64_encode($dataSignature);
-            $signature->getElementsByTagName("SignatureValue")[0]->nodeValue = $SignatureValue;
+            $signature->getElementsByTagName("SignatureValue")->item(0)->nodeValue = $SignatureValue;
 
             $data = "";
             $pubKey = file_get_contents(PATH_CERTIFICATES . "{$params->certificate_id}/pubKEY.pem");
@@ -453,10 +453,10 @@
             }
 
             $X509Certificate = $data;
-            $signature->getElementsByTagName("X509Certificate")[0]->nodeValue = $X509Certificate;
+            $signature->getElementsByTagName("X509Certificate")->item(0)->nodeValue = $X509Certificate;
 
-            $xml->getElementsByTagName($params->appendNode)[0]->appendChild(
-                $xml->importNode($signature->getElementsByTagName("Signature")[0],TRUE)
+            $xml->getElementsByTagName($params->appendNode)->item(0)->appendChild(
+                $xml->importNode($signature->getElementsByTagName("Signature")->item(0),TRUE)
             );
 
             $path = "{$params->path}/assinadas/{$date}/";
@@ -533,58 +533,58 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe.xml");
 
-            $xml->getElementsByTagName("infNFe")[0]->setAttribute("versao", $this->versao);
-            $xml->getElementsByTagName("infNFe")[0]->setAttribute("Id", "NFe{$this->chNFe}");
+            $xml->getElementsByTagName("infNFe")->item(0)->setAttribute("versao", $this->versao);
+            $xml->getElementsByTagName("infNFe")->item(0)->setAttribute("Id", "NFe{$this->chNFe}");
 
             $ide = $this->ide->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($ide->getElementsByTagName("ide")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($ide->getElementsByTagName("ide")->item(0),TRUE)
             );
 
             $emit = $this->emit->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($emit->getElementsByTagName("emit")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($emit->getElementsByTagName("emit")->item(0),TRUE)
             );
 
             if(@$this->dest){
                 $dest = $this->dest->xml();
-                $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                    $xml->importNode($dest->getElementsByTagName("dest")[0],TRUE)
+                $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                    $xml->importNode($dest->getElementsByTagName("dest")->item(0),TRUE)
                 );
             }
 
             foreach($this->det as $det){
                 $item = $det->xml();
-                $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                    $xml->importNode($item->getElementsByTagName("det")[0],TRUE)
+                $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                    $xml->importNode($item->getElementsByTagName("det")->item(0),TRUE)
                 );
             }
 
             $total = $this->total->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($total->getElementsByTagName("total")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($total->getElementsByTagName("total")->item(0),TRUE)
             );
 
             $transp = $this->transp->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($transp->getElementsByTagName("transp")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($transp->getElementsByTagName("transp")->item(0),TRUE)
             );
 
             if(@$this->cobr && @$this->cobr->cobr){
                 $cobr = $this->cobr->xml();
-                $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                    $xml->importNode($cobr->getElementsByTagName("cobr")[0],TRUE)
+                $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                    $xml->importNode($cobr->getElementsByTagName("cobr")->item(0),TRUE)
                 );
             }
 
             $pag = $this->pag->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($pag->getElementsByTagName("pag")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($pag->getElementsByTagName("pag")->item(0),TRUE)
             );
 
             $infCpl = $this->infCpl->xml();
-            $xml->getElementsByTagName("infNFe")[0]->appendChild(
-                $xml->importNode($infCpl->getElementsByTagName("infAdic")[0],TRUE)
+            $xml->getElementsByTagName("infNFe")->item(0)->appendChild(
+                $xml->importNode($infCpl->getElementsByTagName("infAdic")->item(0),TRUE)
             );
 
             $date = date("Y/F/d");
@@ -601,12 +601,12 @@
 
             $dhEmi = str_replace(' ', 'T', date('Y-m-d H:i:sP'));
 
-            $xml->getElementsByTagName("infEvento")[0]->setAttribute("Id", "ID110111{$params->chNFe}01");
-            $xml->getElementsByTagName("tpAmb")[0]->nodeValue = $params->tpAmb;
-            $xml->getElementsByTagName("CNPJ")[0]->nodeValue = $params->CNPJ;
-            $xml->getElementsByTagName("chNFe")[0]->nodeValue = $params->chNFe;
-            $xml->getElementsByTagName("dhEvento")[0]->nodeValue = $dhEmi;
-            $xml->getElementsByTagName("nProt")[0]->nodeValue = $params->nProt;
+            $xml->getElementsByTagName("infEvento")->item(0)->setAttribute("Id", "ID110111{$params->chNFe}01");
+            $xml->getElementsByTagName("tpAmb")->item(0)->nodeValue = $params->tpAmb;
+            $xml->getElementsByTagName("CNPJ")->item(0)->nodeValue = $params->CNPJ;
+            $xml->getElementsByTagName("chNFe")->item(0)->nodeValue = $params->chNFe;
+            $xml->getElementsByTagName("dhEvento")->item(0)->nodeValue = $dhEmi;
+            $xml->getElementsByTagName("nProt")->item(0)->nodeValue = $params->nProt;
 
             $date = date("Y/F/d");
             $path = "{$params->path}/backup/{$date}/";

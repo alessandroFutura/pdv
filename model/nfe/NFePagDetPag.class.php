@@ -66,18 +66,18 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-pag-detPag.xml");
 
-            $xml->getElementsByTagName("tPag")[0]->nodeValue = $this->tPag;
-            $xml->getElementsByTagName("vPag")[0]->nodeValue = number_format($this->vPag,2,".","");
+            $xml->getElementsByTagName("tPag")->item(0)->nodeValue = $this->tPag;
+            $xml->getElementsByTagName("vPag")->item(0)->nodeValue = number_format($this->vPag,2,".","");
 
             if($this->tPag != "03" && $this->tPag != "04"){
-                $node = $xml->getElementsByTagName("card")[0];
+                $node = $xml->getElementsByTagName("card")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
             if($this->tPag == "99"){
-                $xml->getElementsByTagName("xPag")[0]->nodeValue = $this->xPag;
+                $xml->getElementsByTagName("xPag")->item(0)->nodeValue = $this->xPag;
             } else {
-                $node = $xml->getElementsByTagName("xPag")[0];
+                $node = $xml->getElementsByTagName("xPag")->item(0);
                 $node->parentNode->removeChild($node);
             }
 

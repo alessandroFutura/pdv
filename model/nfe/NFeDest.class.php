@@ -48,45 +48,45 @@
             $xml->load(PATH_MODEL . "nfe/xml/nfe-dest.xml");
 
             if(@$this->CPF) {
-                $xml->getElementsByTagName("CPF")[0]->nodeValue = $this->CPF;
+                $xml->getElementsByTagName("CPF")->item(0)->nodeValue = $this->CPF;
             } else {
-                $node = $xml->getElementsByTagName("CPF")[0];
+                $node = $xml->getElementsByTagName("CPF")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
             if(@$this->CNPJ){
-                $xml->getElementsByTagName("CNPJ")[0]->nodeValue = $this->CNPJ;
+                $xml->getElementsByTagName("CNPJ")->item(0)->nodeValue = $this->CNPJ;
             } else {
-                $node = $xml->getElementsByTagName("CNPJ")[0];
+                $node = $xml->getElementsByTagName("CNPJ")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
-            $xml->getElementsByTagName("xNome")[0]->nodeValue = $this->xNome;
+            $xml->getElementsByTagName("xNome")->item(0)->nodeValue = $this->xNome;
 
             $enderDest = $this->enderDest->xml();
-            $xml->getElementsByTagName("dest")[0]->insertBefore(
-                $xml->importNode($enderDest->getElementsByTagName("enderDest")[0],TRUE),
-                $xml->getElementsByTagName("indIEDest")[0]
+            $xml->getElementsByTagName("dest")->item(0)->insertBefore(
+                $xml->importNode($enderDest->getElementsByTagName("enderDest")->item(0),TRUE),
+                $xml->getElementsByTagName("indIEDest")->item(0)
             );
 
             if(@$this->indIEDest){
-                $xml->getElementsByTagName("indIEDest")[0]->nodeValue = $this->indIEDest;
+                $xml->getElementsByTagName("indIEDest")->item(0)->nodeValue = $this->indIEDest;
             } else {
-                $node = $xml->getElementsByTagName("indIEDest")[0];
+                $node = $xml->getElementsByTagName("indIEDest")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
             if(@$this->IE && $this->IE != "ISENTO"){
-                $xml->getElementsByTagName("IE")[0]->nodeValue = $this->IE;
+                $xml->getElementsByTagName("IE")->item(0)->nodeValue = $this->IE;
             } else {
-                $node = $xml->getElementsByTagName("IE")[0];
+                $node = $xml->getElementsByTagName("IE")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
             if(@$this->email) {
-                $xml->getElementsByTagName("email")[0]->nodeValue = $this->email;
+                $xml->getElementsByTagName("email")->item(0)->nodeValue = $this->email;
             } else {
-                $node = $xml->getElementsByTagName("email")[0];
+                $node = $xml->getElementsByTagName("email")->item(0);
                 $node->parentNode->removeChild($node);
             }
 

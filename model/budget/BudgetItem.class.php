@@ -116,7 +116,8 @@
                     "AlRepasseDuplicataPedido=CAST(ISNULL(RPVI.AlComissaoDuplicata,0) AS FLOAT)",
                     "IdDocumentoItem=(SELECT TOP 1 IdDocumentoItem FROM {$conn->dafel->table}.dbo.PedidoDeVendaItem_DocumentoItem WHERE IdPedidoDeVendaItem = BI.external_id ORDER BY IdDocumentoItem DESC)"
                 ],
-                "filters" => [["BI.budget_id", "i", "=", $params->budget_id]]
+                "filters" => [["BI.budget_id", "i", "=", $params->budget_id]],
+                "order" => "BI.budget_item_id"
             ]);
 
             $ret = [];

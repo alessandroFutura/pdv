@@ -56,8 +56,8 @@
                 "parent_id" => $terminal_id,
                 "app_version" => $post->appVersion,
                 "host_ip" => $post->hostIP,
-                "host_name" => $post->hostName,
-                "platform" => $post->platform
+                "log_host_name" => $post->hostName,
+                "log_platform" => $post->platform
             ]);
 
             Json::get((Object)[

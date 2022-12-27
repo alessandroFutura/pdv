@@ -61,24 +61,24 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-det-imposto.xml");
 
-            $xml->getElementsByTagName("vTotTrib")[0]->nodeValue = number_format($this->vTotTrib,2,".","");
+            $xml->getElementsByTagName("vTotTrib")->item(0)->nodeValue = number_format($this->vTotTrib,2,".","");
 
             $ICMS = $this->ICMS->xml();
-            $xml->getElementsByTagName("imposto")[0]->appendChild(
-                $xml->importNode($ICMS->getElementsByTagName("ICMS")[0],TRUE)
+            $xml->getElementsByTagName("imposto")->item(0)->appendChild(
+                $xml->importNode($ICMS->getElementsByTagName("ICMS")->item(0),TRUE)
             );
 
             if(@$this->PIS){
                 $PIS = $this->PIS->xml();
-                $xml->getElementsByTagName("imposto")[0]->appendChild(
-                    $xml->importNode($PIS->getElementsByTagName("PIS")[0],TRUE)
+                $xml->getElementsByTagName("imposto")->item(0)->appendChild(
+                    $xml->importNode($PIS->getElementsByTagName("PIS")->item(0),TRUE)
                 );
             }
 
             if(@$this->COFINS){
                 $COFINS = $this->COFINS->xml();
-                $xml->getElementsByTagName("imposto")[0]->appendChild(
-                    $xml->importNode($COFINS->getElementsByTagName("COFINS")[0],TRUE)
+                $xml->getElementsByTagName("imposto")->item(0)->appendChild(
+                    $xml->importNode($COFINS->getElementsByTagName("COFINS")->item(0),TRUE)
                 );
             }
 

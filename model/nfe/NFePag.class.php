@@ -25,13 +25,13 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-pag.xml");
 
-            $xml->getElementsByTagName("vTroco")[0]->nodeValue = number_format($this->vTroco,2,".","");
+            $xml->getElementsByTagName("vTroco")->item(0)->nodeValue = number_format($this->vTroco,2,".","");
 
             foreach($this->detPag as $detPag){
                 $pag = $detPag->xml();
-                $xml->getElementsByTagName("pag")[0]->insertBefore(
-                    $xml->importNode($pag->getElementsByTagName("detPag")[0],TRUE),
-                    $xml->getElementsByTagName("vTroco")[0]
+                $xml->getElementsByTagName("pag")->item(0)->insertBefore(
+                    $xml->importNode($pag->getElementsByTagName("detPag")->item(0),TRUE),
+                    $xml->getElementsByTagName("vTroco")->item(0)
                 );
             }
 

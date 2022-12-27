@@ -49,17 +49,17 @@
             $data = $data[$this->CSOSN];
             foreach([101,102,500,900] as $csosn){
                 if($data != $csosn){
-                    $node = $xml->getElementsByTagName("ICMSSN{$csosn}")[0];
+                    $node = $xml->getElementsByTagName("ICMSSN{$csosn}")->item(0);
                     $node->parentNode->removeChild($node);
                 }
             }
 
-            $xml->getElementsByTagName("orig")[0]->nodeValue = $this->orig;
-            $xml->getElementsByTagName("CSOSN")[0]->nodeValue = $this->CSOSN;
+            $xml->getElementsByTagName("orig")->item(0)->nodeValue = $this->orig;
+            $xml->getElementsByTagName("CSOSN")->item(0)->nodeValue = $this->CSOSN;
 
             if(@$this->pCredSN && @$this->vCredICMSSN){
-                $xml->getElementsByTagName("pCredSN")[0]->nodeValue = number_format($this->pCredSN,2,".","");
-                $xml->getElementsByTagName("vCredICMSSN")[0]->nodeValue = number_format($this->vCredICMSSN,2,".","");
+                $xml->getElementsByTagName("pCredSN")->item(0)->nodeValue = number_format($this->pCredSN,2,".","");
+                $xml->getElementsByTagName("vCredICMSSN")->item(0)->nodeValue = number_format($this->vCredICMSSN,2,".","");
             }
 
             return $xml;

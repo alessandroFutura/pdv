@@ -21,10 +21,10 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-transp.xml");
 
-            $xml->getElementsByTagName("modFrete")[0]->nodeValue = $this->modFrete;
+            $xml->getElementsByTagName("modFrete")->item(0)->nodeValue = $this->modFrete;
 
             if($this->modFrete == 9){
-                $node = $xml->getElementsByTagName("vol")[0];
+                $node = $xml->getElementsByTagName("vol")->item(0);
                 $node->parentNode->removeChild($node);
             }
 

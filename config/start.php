@@ -29,6 +29,8 @@
     $post = json_decode(file_get_contents("php://input"));
     $headers = getallheaders();
 
+    $config = Config::getList();
+
     if(SCRIPT_NAME != "terminal"){
         $terminal = Terminal::get((Object)[
             "token" => $headers["x-token"]
@@ -41,7 +43,7 @@
         }
     }
 
-    if(SCRIPT_NAME != "login"){
+    if(SCRIPT_NAME != "login" && !(SCRIPT_NAME == "terminal" && @$get->action && $get->action == "add")){
         $login = UserSession::restore();
         if(!@$login || $login->user_active == "N"){
             headerResponse((Object)[

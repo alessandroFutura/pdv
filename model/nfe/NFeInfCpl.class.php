@@ -38,12 +38,12 @@
             $xml->load(PATH_MODEL . "nfe/xml/nfe-infAdic.xml");
 
             if($this->mod == 65){
-                $xml->getElementsByTagName("infAdFisco")[0]->nodeValue = $this->_infAdFisco();
+                $xml->getElementsByTagName("infAdFisco")->item(0)->nodeValue = $this->_infAdFisco();
             } else {
 
             }
 
-            $xml->getElementsByTagName("infCpl")[0]->nodeValue = implode(" ", $this->_infCpl());
+            $xml->getElementsByTagName("infCpl")->item(0)->nodeValue = implode(" ", $this->_infCpl());
 
             return $xml;
         }

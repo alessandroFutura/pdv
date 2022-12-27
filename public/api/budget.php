@@ -39,11 +39,41 @@
                 ]);
             }
 
+            $states = [];
+            if(@$post->show_opened && $post->show_opened == "Y"){
+                $states[] = "A";
+            }
+            if(@$post->show_billed && $post->show_billed == "Y"){
+                $states[] = "F";
+            }
+
             Json::get(Budget::getList((Object)[
                 "company_id" => $post->company_id,
                 "reference" => $post->reference,
-                "state" => @$post->states && sizeof($post->states) == 1 ? $post->states[0] : NULL
+                "show_others" => @$post->show_others && $post->show_others == "Y",
+                "state" => sizeof($states) && sizeof($states) == 1 ? $states[0] : NULL
             ]));
+
+        break;
+
+        case "recover":
+
+            if(!@$post->budget_id){
+                headerResponse((Object)[
+                    "code" => 417,
+                    "message" => "Parâmetro POST não encontrado."
+                ]);
+            }
+
+            Budget::recover((Object)[
+                "budget_id" => $post->budget_id
+            ]);
+
+            postLog((Object)[
+                "parent_id" => $post->budget_id
+            ]);
+
+            Json::get([]);
 
         break;
     }

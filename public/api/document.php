@@ -8,7 +8,7 @@
 
         case "cancel":
 
-            if(!@$post->budget_id || !@$post->external_id){
+            if(!@$post->budget_id || !@$post->external_id || !@$post->budget_credit){
                 headerResponse((Object)[
                     "code" => 417,
                     "message" => "Parâmetro POST não encontrado"
@@ -297,14 +297,17 @@
                 "IdLoteEstoque" => $data->IdLoteEstoque
             ]);
 
-            PedidoDeVenda::reopen((Object)[
-                "IdPedidoDeVenda" => $post->external_id
-            ]);
-
             TerminalDocument::cancel((Object)[
                 "budget_id" => $post->budget_id,
                 "IdDocumento" => $data->IdDocumento
             ]);
+
+            if($post->budget_credit == "Y"){
+                Budget::creditReopen((Object)[
+                    "budget_id" => $post->budget_id,
+                    "addPayment" => 1
+                ]);
+            }
 
             postLog((Object)[
                 "parent_id" => $data->IdDocumento
@@ -405,6 +408,7 @@
                         "budget_id" => $post->budget_id
                     ]);
                 }
+
 
                 $nfe->digVal = NFe::sign((Object)[
                     "node" => "infNFe",
@@ -648,6 +652,12 @@
                 "CdStatus" => 9
             ]);
 
+            Dav::edit((Object)[
+                "StDocumentoAuxVenda" => "E",
+                "NrCupomFiscal" => $post->nfe->nNF,
+                "IdDocumentoAuxVenda" =>  $post->external_id
+            ]);
+
             postLog((Object)[
                 "parent_id" => $post->budget_id
             ]);
@@ -660,7 +670,7 @@
                 "IdLoteEstoque" => $post->nfe->IdLoteEstoque
             ]);
 
-            break;
+        break;
 
         case "submitOE":
 
@@ -912,7 +922,7 @@
                 "IdLoteEstoque" => $post->nfe->IdLoteEstoque
             ]);
 
-            break;
+        break;
 
     }
 

@@ -45,7 +45,8 @@
             $this->modelo = $data->modelo;
             $this->idLote = @$data->idLote ? $data->idLote : NULL;
             $this->cNF = @$data->cNF ? $data->cNF : NULL;
-            $this->nNF = $this->modelo == "65" ? substr("00000000{$data->nNF}",-9) : $data->nNF;
+            $this->nNF = $data->nNF;
+            $this->NrDocumento = $this->modelo == "65" ? substr("00000000{$data->nNF}",-9) : $data->nNF;
             $this->chNFe = @$data->chNFe ? $data->chNFe : NULL;
             $this->verAplic = $data->verAplic;
 

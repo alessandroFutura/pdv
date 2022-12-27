@@ -56,15 +56,15 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-dest-ender.xml");
 
-            $xml->getElementsByTagName("xLgr")[0]->nodeValue = $this->xLgr;
-            $xml->getElementsByTagName("nro")[0]->nodeValue = $this->nro;
-            $xml->getElementsByTagName("xBairro")[0]->nodeValue = $this->xBairro;
-            $xml->getElementsByTagName("cMun")[0]->nodeValue = $this->cMun;
-            $xml->getElementsByTagName("xMun")[0]->nodeValue = $this->xMun;
-            $xml->getElementsByTagName("UF")[0]->nodeValue = $this->UF;
-            $xml->getElementsByTagName("CEP")[0]->nodeValue = $this->CEP;
-            $xml->getElementsByTagName("cPais")[0]->nodeValue = $this->cPais;
-            $xml->getElementsByTagName("xPais")[0]->nodeValue = $this->xPais;
+            $xml->getElementsByTagName("xLgr")->item(0)->nodeValue = $this->xLgr;
+            $xml->getElementsByTagName("nro")->item(0)->nodeValue = $this->nro;
+            $xml->getElementsByTagName("xBairro")->item(0)->nodeValue = $this->xBairro;
+            $xml->getElementsByTagName("cMun")->item(0)->nodeValue = $this->cMun;
+            $xml->getElementsByTagName("xMun")->item(0)->nodeValue = $this->xMun;
+            $xml->getElementsByTagName("UF")->item(0)->nodeValue = $this->UF;
+            $xml->getElementsByTagName("CEP")->item(0)->nodeValue = $this->CEP;
+            $xml->getElementsByTagName("cPais")->item(0)->nodeValue = $this->cPais;
+            $xml->getElementsByTagName("xPais")->item(0)->nodeValue = $this->xPais;
 
             return $xml;
         }

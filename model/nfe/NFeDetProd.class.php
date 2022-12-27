@@ -67,51 +67,51 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-det-prod.xml");
 
-            $xml->getElementsByTagName("cProd")[0]->nodeValue = $this->cProd;
-            $xml->getElementsByTagName("cEAN")[0]->nodeValue = $this->cEAN;
-            $xml->getElementsByTagName("xProd")[0]->nodeValue = $this->xProd;
-            $xml->getElementsByTagName("NCM")[0]->nodeValue = str_replace(".","",$this->NCM);
+            $xml->getElementsByTagName("cProd")->item(0)->nodeValue = $this->cProd;
+            $xml->getElementsByTagName("cEAN")->item(0)->nodeValue = $this->cEAN;
+            $xml->getElementsByTagName("xProd")->item(0)->nodeValue = $this->xProd;
+            $xml->getElementsByTagName("NCM")->item(0)->nodeValue = str_replace(".","",$this->NCM);
 
             if(@$this->CEST) {
-                $xml->getElementsByTagName("CEST")[0]->nodeValue = str_replace(".","",$this->CEST);
+                $xml->getElementsByTagName("CEST")->item(0)->nodeValue = str_replace(".","",$this->CEST);
             } else {
-                $node = $xml->getElementsByTagName("CEST")[0];
+                $node = $xml->getElementsByTagName("CEST")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
-            $xml->getElementsByTagName("CFOP")[0]->nodeValue = $this->CFOP;
-            $xml->getElementsByTagName("uCom")[0]->nodeValue = $this->uCom;
-            $xml->getElementsByTagName("qCom")[0]->nodeValue = number_format($this->qCom,4,".","");
-            $xml->getElementsByTagName("vUnCom")[0]->nodeValue = number_format($this->vUnCom,4,".","");
-            $xml->getElementsByTagName("vProd")[0]->nodeValue = number_format($this->vProd,2,".","");
+            $xml->getElementsByTagName("CFOP")->item(0)->nodeValue = $this->CFOP;
+            $xml->getElementsByTagName("uCom")->item(0)->nodeValue = $this->uCom;
+            $xml->getElementsByTagName("qCom")->item(0)->nodeValue = number_format($this->qCom,4,".","");
+            $xml->getElementsByTagName("vUnCom")->item(0)->nodeValue = number_format($this->vUnCom,4,".","");
+            $xml->getElementsByTagName("vProd")->item(0)->nodeValue = number_format($this->vProd,2,".","");
 
             if(@$this->vFrete) {
-                $xml->getElementsByTagName("vFrete")[0]->nodeValue = number_format($this->vFrete,2,".","");
+                $xml->getElementsByTagName("vFrete")->item(0)->nodeValue = number_format($this->vFrete,2,".","");
             } else {
-                $node = $xml->getElementsByTagName("vFrete")[0];
+                $node = $xml->getElementsByTagName("vFrete")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
             if(@$this->vOutro) {
-                $xml->getElementsByTagName("vOutro")[0]->nodeValue = number_format($this->vOutro,2,".","");
+                $xml->getElementsByTagName("vOutro")->item(0)->nodeValue = number_format($this->vOutro,2,".","");
             } else {
-                $node = $xml->getElementsByTagName("vOutro")[0];
+                $node = $xml->getElementsByTagName("vOutro")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
-            $xml->getElementsByTagName("cEANTrib")[0]->nodeValue = $this->cEANTrib;
-            $xml->getElementsByTagName("uTrib")[0]->nodeValue = $this->uTrib;
-            $xml->getElementsByTagName("qTrib")[0]->nodeValue = number_format($this->qTrib,4,".","");
-            $xml->getElementsByTagName("vUnTrib")[0]->nodeValue = number_format($this->vUnTrib,4,".","");
+            $xml->getElementsByTagName("cEANTrib")->item(0)->nodeValue = $this->cEANTrib;
+            $xml->getElementsByTagName("uTrib")->item(0)->nodeValue = $this->uTrib;
+            $xml->getElementsByTagName("qTrib")->item(0)->nodeValue = number_format($this->qTrib,4,".","");
+            $xml->getElementsByTagName("vUnTrib")->item(0)->nodeValue = number_format($this->vUnTrib,4,".","");
 
             if(@$this->vDesc) {
-                $xml->getElementsByTagName("vDesc")[0]->nodeValue = number_format($this->vDesc,2,".","");
+                $xml->getElementsByTagName("vDesc")->item(0)->nodeValue = number_format($this->vDesc,2,".","");
             } else {
-                $node = $xml->getElementsByTagName("vDesc")[0];
+                $node = $xml->getElementsByTagName("vDesc")->item(0);
                 $node->parentNode->removeChild($node);
             }
 
-            $xml->getElementsByTagName("indTot")[0]->nodeValue = $this->indTot;
+            $xml->getElementsByTagName("indTot")->item(0)->nodeValue = $this->indTot;
 
             return $xml;
         }

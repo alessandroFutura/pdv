@@ -55,16 +55,16 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-emit.xml");
 
-            $xml->getElementsByTagName("CNPJ")[0]->nodeValue = $this->CNPJ;
-            $xml->getElementsByTagName("xNome")[0]->nodeValue = $this->xNome;
-            $xml->getElementsByTagName("xFant")[0]->nodeValue = $this->xFant;
-            $xml->getElementsByTagName("IE")[0]->nodeValue = $this->IE;
-            $xml->getElementsByTagName("CRT")[0]->nodeValue = $this->CRT;
+            $xml->getElementsByTagName("CNPJ")->item(0)->nodeValue = $this->CNPJ;
+            $xml->getElementsByTagName("xNome")->item(0)->nodeValue = $this->xNome;
+            $xml->getElementsByTagName("xFant")->item(0)->nodeValue = $this->xFant;
+            $xml->getElementsByTagName("IE")->item(0)->nodeValue = $this->IE;
+            $xml->getElementsByTagName("CRT")->item(0)->nodeValue = $this->CRT;
 
             $enderEmit = $this->enderEmit->xml();
-            $xml->getElementsByTagName("emit")[0]->insertBefore(
-                $xml->importNode($enderEmit->getElementsByTagName("enderEmit")[0], TRUE),
-                $xml->getElementsByTagName("IE")[0]
+            $xml->getElementsByTagName("emit")->item(0)->insertBefore(
+                $xml->importNode($enderEmit->getElementsByTagName("enderEmit")->item(0), TRUE),
+                $xml->getElementsByTagName("IE")->item(0)
             );
 
             return $xml;

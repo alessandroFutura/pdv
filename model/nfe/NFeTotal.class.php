@@ -59,26 +59,26 @@
             $xml->preserveWhiteSpace = FALSE;
             $xml->load(PATH_MODEL . "nfe/xml/nfe-total.xml");
 
-            $xml->getElementsByTagName("vBC")[0]->nodeValue = number_format($this->vBC,2,".","");
-            $xml->getElementsByTagName("vICMS")[0]->nodeValue = number_format($this->vICMS,2,".","");
-            $xml->getElementsByTagName("vICMSDeson")[0]->nodeValue = number_format($this->vICMSDeson,2,".","");
-            $xml->getElementsByTagName("vFCP")[0]->nodeValue = number_format($this->vFCP,2,".","");
-            $xml->getElementsByTagName("vBCST")[0]->nodeValue = number_format($this->vBCST,2,".","");
-            $xml->getElementsByTagName("vST")[0]->nodeValue = number_format($this->vST,2,".","");
-            $xml->getElementsByTagName("vFCPST")[0]->nodeValue = number_format($this->vFCPST,2,".","");
-            $xml->getElementsByTagName("vFCPSTRet")[0]->nodeValue = number_format($this->vFCPSTRet,2,".","");
-            $xml->getElementsByTagName("vProd")[0]->nodeValue = number_format($this->vProd,2,".","");
-            $xml->getElementsByTagName("vFrete")[0]->nodeValue = number_format($this->vFrete,2,".","");
-            $xml->getElementsByTagName("vSeg")[0]->nodeValue = number_format($this->vSeg,2,".","");
-            $xml->getElementsByTagName("vDesc")[0]->nodeValue = number_format($this->vDesc,2,".","");
-            $xml->getElementsByTagName("vII")[0]->nodeValue = number_format($this->vII,2,".","");
-            $xml->getElementsByTagName("vIPI")[0]->nodeValue = number_format($this->vIPI,2,".","");
-            $xml->getElementsByTagName("vIPIDevol")[0]->nodeValue = number_format($this->vIPIDevol,2,".","");
-            $xml->getElementsByTagName("vPIS")[0]->nodeValue = number_format($this->vPIS,2,".","");
-            $xml->getElementsByTagName("vCOFINS")[0]->nodeValue = number_format($this->vCOFINS,2,".","");
-            $xml->getElementsByTagName("vOutro")[0]->nodeValue = number_format($this->vOutro,2,".","");
-            $xml->getElementsByTagName("vNF")[0]->nodeValue = number_format($this->vNF,2,".","");
-            $xml->getElementsByTagName("vTotTrib")[0]->nodeValue = number_format($this->vTotTrib,2,".","");
+            $xml->getElementsByTagName("vBC")->item(0)->nodeValue = number_format($this->vBC,2,".","");
+            $xml->getElementsByTagName("vICMS")->item(0)->nodeValue = number_format($this->vICMS,2,".","");
+            $xml->getElementsByTagName("vICMSDeson")->item(0)->nodeValue = number_format($this->vICMSDeson,2,".","");
+            $xml->getElementsByTagName("vFCP")->item(0)->nodeValue = number_format($this->vFCP,2,".","");
+            $xml->getElementsByTagName("vBCST")->item(0)->nodeValue = number_format($this->vBCST,2,".","");
+            $xml->getElementsByTagName("vST")->item(0)->nodeValue = number_format($this->vST,2,".","");
+            $xml->getElementsByTagName("vFCPST")->item(0)->nodeValue = number_format($this->vFCPST,2,".","");
+            $xml->getElementsByTagName("vFCPSTRet")->item(0)->nodeValue = number_format($this->vFCPSTRet,2,".","");
+            $xml->getElementsByTagName("vProd")->item(0)->nodeValue = number_format($this->vProd,2,".","");
+            $xml->getElementsByTagName("vFrete")->item(0)->nodeValue = number_format($this->vFrete,2,".","");
+            $xml->getElementsByTagName("vSeg")->item(0)->nodeValue = number_format($this->vSeg,2,".","");
+            $xml->getElementsByTagName("vDesc")->item(0)->nodeValue = number_format($this->vDesc,2,".","");
+            $xml->getElementsByTagName("vII")->item(0)->nodeValue = number_format($this->vII,2,".","");
+            $xml->getElementsByTagName("vIPI")->item(0)->nodeValue = number_format($this->vIPI,2,".","");
+            $xml->getElementsByTagName("vIPIDevol")->item(0)->nodeValue = number_format($this->vIPIDevol,2,".","");
+            $xml->getElementsByTagName("vPIS")->item(0)->nodeValue = number_format($this->vPIS,2,".","");
+            $xml->getElementsByTagName("vCOFINS")->item(0)->nodeValue = number_format($this->vCOFINS,2,".","");
+            $xml->getElementsByTagName("vOutro")->item(0)->nodeValue = number_format($this->vOutro,2,".","");
+            $xml->getElementsByTagName("vNF")->item(0)->nodeValue = number_format($this->vNF,2,".","");
+            $xml->getElementsByTagName("vTotTrib")->item(0)->nodeValue = number_format($this->vTotTrib,2,".","");
 
             return $xml;
         }

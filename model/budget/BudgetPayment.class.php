@@ -37,6 +37,25 @@
             ];
         }
 
+        public static function add($params)
+        {
+            GLOBAL $commercial;
+
+            Model::insert($commercial, (Object)[
+                "table" => "BudgetPayment",
+                "fields" => [
+                    ["budget_id", "s", $params->budget_id],
+                    ["modality_id", "s", "00A000000P"],
+                    ["budget_payment_value", "s", $params->budget_payment_value],
+                    ["budget_payment_installment", "s", 1],
+                    ["budget_payment_entry", "s", "N"],
+                    ["budget_payment_credit", "s", "N"],
+                    ["budget_payment_deadline", "s", $params->budget_payment_reference],
+                    ["budget_payment_date", "s", $params->budget_payment_reference]
+                ]
+            ]);
+        }
+
         public static function getList($params)
         {
             GLOBAL $conn, $commercial;
