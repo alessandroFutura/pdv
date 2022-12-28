@@ -43,7 +43,7 @@
 
         public function _cEAN($data)
         {
-            return @$data->product->CdEAN ? $data->product->CdEAN : "SEM GTIN";
+            return @$data->product->CdEAN && strlen($data->product->CdEAN) == 13 ? $data->product->CdEAN : "SEM GTIN";
         }
 
         public function _CEST($data)
