@@ -38,9 +38,10 @@
             GLOBAL $commercial;
 
             Model::delete($commercial, (Object)[
+                "top" => 10,
                 "table" => "BudgetInstance",
                 "filters" => [
-                    ["budget_id", "i", "=", $params->budget_id],
+                    ["budget_id", "i", "=", @$params->budget_id ? $params->budget_id : NULL],
                     ["instance_id", "s", "=", $params->instance_id],
                 ]
             ]);

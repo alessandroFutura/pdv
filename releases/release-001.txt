@@ -1,0 +1,5 @@
+RECURSOS
+
+- Tratamento para não deixar recuperar o orçamento mais de uma vez
+- Tratamento para não deixar cancelar o documento mais de uma vez
+- Instancia para proteção do orçamento

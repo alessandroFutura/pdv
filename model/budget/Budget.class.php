@@ -395,7 +395,14 @@
             if(!@$budget){
                 headerResponse((Object)[
                     "code" => 404,
-                    "message" => "Orçamento ão encontrado."
+                    "message" => "Orçamento não encontrado."
+                ]);
+            }
+
+            if($budget->budget_status != "L"){
+                headerResponse((Object)[
+                    "code" => 404,
+                    "message" => "O orçamento não está liberado."
                 ]);
             }
 

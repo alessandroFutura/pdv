@@ -86,9 +86,9 @@
 
         case "removeInstance":
 
-            if(@$post->budget_id && @$post->instance_id){
+            if(@$post->instance_id){
                 BudgetInstance::del((Object)[
-                    "budget_id" => $post->budget_id,
+                    "budget_id" => @$post->budget_id ? $post->budget_id : NULL,
                     "instance_id" => $post->instance_id
                 ]);
             }

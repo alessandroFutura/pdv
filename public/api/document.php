@@ -26,6 +26,13 @@
                 ]);
             }
 
+            if($data->StCancelado == "S"){
+                headerResponse((Object)[
+                    "code" => 404,
+                    "message" => "O documento já foi cancelado!"
+                ]);
+            }
+
             $lot = LoteEstoque::get((Object)[
                 "IdLoteEstoque" => $data->IdLoteEstoque
             ]);
