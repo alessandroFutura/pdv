@@ -307,7 +307,7 @@
                     ["B.company_id", "i", "=", $params->company_id],
                     !@$params->show_others ? ["ISNULL(TD.user_id,{$login->user_id}) = {$login->user_id}"] : NULL,
                     ["(CASE WHEN ISNULL(TD.CdStatus,0) >= 9 THEN 'F' ELSE 'A' END)", "s", "=", @$params->state ? $params->state : NULL],
-                    ["B.budget_date", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
+                    ["ISNULL(TD.terminal_document_update,ISNULL(TD.terminal_document_date,ISNULL(B.budget_update, B.budget_date)))", "s", "between", ["{$params->reference} 00:00:00", "{$params->reference} 23:23:59"]]
                 ]
             ]);
 
