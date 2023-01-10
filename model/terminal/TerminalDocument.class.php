@@ -254,11 +254,11 @@
             ]);
 
             if(@$data){
-                $data->NrSequencial = (int)$data->NrSequencial;
+                $data->NrSequencial = (int)$data->NrSequencial + 1;
 
                 Model::update($dafel, (Object)[
                     "table" => "TipoDocumentoEmpresa",
-                    "fields" => [["NrSequencial", "i", $data->NrSequencial + 1]],
+                    "fields" => [["NrSequencial", "i", $data->NrSequencial]],
                     "filters" => [
                         ["CdEmpresa", "i", "=", $params->CdEmpresa],
                         ["IdTipoDocumento", "s", "=", $params->IdTipoDocumento],

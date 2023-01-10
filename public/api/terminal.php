@@ -89,6 +89,8 @@
                 "terminal_operation_value" => $post->terminal_operation_value
             ]);
 
+            Json::get((Object)[]);
+
         break;
 
     }

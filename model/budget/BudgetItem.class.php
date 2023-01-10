@@ -67,7 +67,7 @@
                 "debug" => 0,
                 "tables" => [
                     "{$conn->commercial->table}.dbo.BudgetItem BI(NoLock)",
-                    "INNER JOIN {$conn->commercial->table}.dbo.BudgetItemTrib BIT(NoLock) ON BIT.budget_item_id = BI.budget_item_id",
+                    "LEFT JOIN {$conn->commercial->table}.dbo.BudgetItemTrib BIT(NoLock) ON BIT.budget_item_id = BI.budget_item_id",
                     "INNER JOIN {$conn->dafel->table}.dbo.Produto P(NoLock) ON P.IdProduto = BI.product_id",
                     "INNER JOIN {$conn->dafel->table}.dbo.Produto_Empresa PE(NoLock) ON PE.IdProduto = P.IdProduto AND PE.CdEmpresa = {$params->CdEmpresa}",
                     "INNER JOIN {$conn->dafel->table}.dbo.CodigoProduto CP(NoLock) ON CP.IdProduto = P.IdProduto AND CP.StCodigoPrincipal = 'S'",

@@ -316,6 +316,10 @@
                 ]);
             }
 
+            Budget::recover((Object)[
+                "budget_id" => $post->budget_id
+            ]);
+
             postLog((Object)[
                 "parent_id" => $data->IdDocumento
             ]);
@@ -873,34 +877,39 @@
                 "CdStatus" => 7
             ]);
 
-            foreach($post->payments as $key => $payment){
+            if(@$post->payments){
+                foreach($post->payments as $key => $payment){
 
-                $payment = (Object)$payment;
-                $payment->external = (Object)$payment->external;
+                    $payment = (Object)$payment;
+                    $payment->external = (Object)$payment->external;
 
-                LoteDocPagamento::add((Object)[
-                    "IdDocumento" => $post->nfe->IdDocumento,
-                    "IdTipoBaixa" => $payment->external->IdTipoBaixa,
-                    "NrDias" => $payment->external->NrDias,
-                    "NrTitulo" => "{$post->nfe->nNF}-" . ($key+1),
-                    "DtVencimento" => $payment->budget_payment_deadline,
-                    "IdNaturezaLancamento" => $payment->external->IdNaturezaLancamento,
-                    "VlTitulo" => $payment->budget_payment_value,
-                    "IdFormaPagamento" => $payment->modality_id,
-                    "StEntrada" => $payment->budget_payment_entry == "Y" ? "S" : "N",
-                    "IdPessoaConvenio" => $payment->external->IdPessoaConvenio,
-                    "AlConvenio" => $payment->external->AlConvenio,
-                    "IdContaBancaria" => $post->company->external->IdContaBancariaCaixa,
-                    "NrParcelas" => $payment->budget_payment_installment,
-                    "NrParcelasRecebimento" => $payment->external->NrParcelasRecebimento,
-                    "NrDiasRecebimento" => $payment->external->NrDiasRecebimento,
-                    "NrDiasIntervalo" => $payment->external->NrDiasIntervalo,
-                    "NrDiasPrimeiraParcelaVenda" => $payment->external->NrDiasPrimeiraParcelaVenda,
-                    "AlTACConvenio" => $payment->external->AlTACConvenio,
-                    "AlTACEmpresa" => $payment->external->AlTACEmpresa,
-                    "StAtualizaFinanceiro" => $post->operation->StAtualizaFinanceiro,
-                    "StCartaCredito" => "N"
-                ]);
+                    if($payment->budget_payment_credit == "N"){
+
+                        LoteDocPagamento::add((Object)[
+                            "IdDocumento" => $post->nfe->IdDocumento,
+                            "IdTipoBaixa" => $payment->external->IdTipoBaixa,
+                            "NrDias" => $payment->external->NrDias,
+                            "NrTitulo" => "{$post->nfe->nNF}-" . ($key+1),
+                            "DtVencimento" => $payment->budget_payment_deadline,
+                            "IdNaturezaLancamento" => $payment->external->IdNaturezaLancamento,
+                            "VlTitulo" => $payment->budget_payment_value,
+                            "IdFormaPagamento" => $payment->modality_id,
+                            "StEntrada" => $payment->budget_payment_entry == "Y" ? "S" : "N",
+                            "IdPessoaConvenio" => $payment->external->IdPessoaConvenio,
+                            "AlConvenio" => $payment->external->AlConvenio,
+                            "IdContaBancaria" => $post->company->external->IdContaBancariaCaixa,
+                            "NrParcelas" => $payment->budget_payment_installment,
+                            "NrParcelasRecebimento" => $payment->external->NrParcelasRecebimento,
+                            "NrDiasRecebimento" => $payment->external->NrDiasRecebimento,
+                            "NrDiasIntervalo" => $payment->external->NrDiasIntervalo,
+                            "NrDiasPrimeiraParcelaVenda" => $payment->external->NrDiasPrimeiraParcelaVenda,
+                            "AlTACConvenio" => $payment->external->AlTACConvenio,
+                            "AlTACEmpresa" => $payment->external->AlTACEmpresa,
+                            "StAtualizaFinanceiro" => $post->operation->StAtualizaFinanceiro,
+                            "StCartaCredito" => "N"
+                        ]);
+                    }
+                }
             }
 
             TerminalDocument::editStatus((Object)[

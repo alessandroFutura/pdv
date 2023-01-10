@@ -19,6 +19,7 @@
             $this->modality_id = $data->modality_id;
             $this->budget_payment_id = (int)$data->budget_payment_id;
             $this->budget_payment_entry = $data->budget_payment_entry;
+            $this->budget_payment_credit = $data->budget_payment_credit;
             $this->budget_payment_deadline = $data->budget_payment_deadline;
             $this->budget_payment_value = (float)$data->budget_payment_value;
             $this->budget_payment_installment = (int)$data->budget_payment_installment;
@@ -105,6 +106,7 @@
                     "FPI.NrDiasRecebimento",
                     "FP.IdNaturezaLancamento",
                     "BP.budget_payment_entry",
+                    "BP.budget_payment_credit",
                     "FPI.NrParcelasRecebimento",
                     "FPI.NrDiasPrimeiraParcelaVenda",
                     "BP.budget_payment_installment",
