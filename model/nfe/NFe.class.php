@@ -614,6 +614,43 @@
 
             $xml->save("{$path}/110111{$params->chNFe}01-can.xml");
         }
+
+        public static function xmlAfterCancel($params)
+        {
+            $date = new DateTime($params->DtEmissao);
+
+            $xml = new DOMDocument();
+            $xml->preserveWhiteSpace = FALSE;
+            $xml->load(PATH_MODEL . "nfe/xml/nfe-can.xml");
+
+            $xmlCan = new DOMDocument();
+            $xmlCan->preserveWhiteSpace = FALSE;
+            $xmlCan->load(PATH_XML . "{$params->CdEmpresa}/assinadas/{$date->format("Y/F/d")}/110111{$params->chNFe}01-sign.xml");
+
+            $xmlRet = new DOMDocument();
+            $xmlRet->preserveWhiteSpace = FALSE;
+            $xmlRet->load(PATH_XML . "{$params->CdEmpresa}/retorno/{$date->format("Y/F/d")}/110111{$params->chNFe}01-ret.xml");
+
+            $signatureNode = $xml->getElementsByTagName("Signature")->item(0);
+            $signatureNodeCan = $xmlCan->getElementsByTagName("Signature")->item(0);
+
+            $xml->getElementsByTagName("evento")->item(0)->insertBefore(
+                $xml->importNode($xmlCan->getElementsByTagName("infEvento")->item(0), TRUE),
+                $signatureNode
+            );
+            $xml->getElementsByTagName("procEventoNFe")->item(0)->appendChild(
+                $xml->importNode($xmlRet->getElementsByTagName("retEvento")->item(0), TRUE)
+            );
+
+            $xml->getElementsByTagName("retEvento")->item(0)->setAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe");
+            $signatureNode->getElementsByTagName("Reference")->item(0)->setAttribute("URI", "#ID110111{$params->chNFe}01");
+            $signatureNode->getElementsByTagName("DigestValue")->item(0)->nodeValue = $signatureNodeCan->getElementsByTagName("DigestValue")->item(0)->nodeValue;
+            $signatureNode->getElementsByTagName("SignatureValue")->item(0)->nodeValue = $signatureNodeCan->getElementsByTagName("SignatureValue")->item(0)->nodeValue;
+            $signatureNode->getElementsByTagName("X509Certificate")->item(0)->nodeValue = $signatureNodeCan->getElementsByTagName("X509Certificate")->item(0)->nodeValue;
+
+            $xml->save(PATH_XML . "{$params->CdEmpresa}/autorizadas/{$date->format("Y/F/d")}/{$params->chNFe}-can.xml");
+
+        }
     }
 
 ?>

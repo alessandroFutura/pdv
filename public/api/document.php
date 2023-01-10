@@ -138,6 +138,12 @@
                         "urlService" => "https://{$type}" . (TP_AMBIENT == 2 ? "-homologacao" : "") . ".svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento4.asmx",
                     ]);
 
+                    NFe::xmlAfterCancel((Object)[
+                        "chNFe" => $data->chNFe,
+                        "CdEmpresa" => $post->company_id,
+                        "DtEmissao" => substr($data->dhRecbto,0,10)
+                    ]);
+
                     TerminalDocument::editStatus((Object)[
                         "terminal_document_id" => $data->terminal_document_id,
                         "CdStatus" => 903
