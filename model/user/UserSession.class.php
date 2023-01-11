@@ -94,7 +94,7 @@
                         ["user_session_origin = 'P'"],
                         ["user_id", "i", "=", $headers["x-user-id"]],
                         ["user_session_value", "s", "=", $headers["x-user-session-value"]],
-                        ["user_session_date", "s", ">=", date("Y-m-d")]
+                        //["user_session_date", "s", ">=", date("Y-m-d")]
                     ]
                 ]);
 

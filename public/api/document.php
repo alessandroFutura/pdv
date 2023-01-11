@@ -322,10 +322,6 @@
                 ]);
             }
 
-            Budget::recover((Object)[
-                "budget_id" => $post->budget_id
-            ]);
-
             postLog((Object)[
                 "parent_id" => $data->IdDocumento
             ]);
