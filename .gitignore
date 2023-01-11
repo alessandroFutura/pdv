@@ -3,6 +3,14 @@
 /doc
 /.idea
 /public/site
+/public/xml.php
+/public/index.php
+/public/_index.php
+/public/pika/index.php
+/public/precache-manifest.2c020c3b7611303235f63da04908f23f.js
+/public/precache-manifest.e3b1b7ebdae0612642a26d09939fc178.js
 /class/phpqrcode
 /xml
+/xml-producao
 /public/qrcode
+/public/static
